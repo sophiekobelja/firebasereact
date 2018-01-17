@@ -3,6 +3,7 @@ import * as firebase from "firebase";
 import BugsList from './components/BugsList';
 import Header from './components/Header';
 import trim from 'trim';
+import ReactD3Pack from './ReactD3Pack'
 
 var config = {
     apiKey: "AIzaSyBe5V4Xj9_D2JAWw-5k6gUeRTRtxfXPCSc",
@@ -24,7 +25,9 @@ class App extends React.Component {
         isLoaded: false,
         items: [],
         message: '',
-        bugname: ''
+        bugname: '',
+        url: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/98887/d3pack-flare-short.json'
+
       };
       let bugname = "bug_0"
     }
@@ -63,9 +66,19 @@ class App extends React.Component {
           </textarea>
       </form>
             <div className="columns">
-              <div className="column is-3"></div>
+              <div className="column is-3">
+                 <BugsList db={firebase} />
+              </div>
               <div className="column is-6">
-                <BugsList db={firebase} bugname={this.state.bugname}/>
+                
+
+                <div style={{width: '100%'}}>
+                  <ReactD3Pack startDelay={1000}
+                               elementDelay={50}
+                               db = {firebase}
+                               json={ 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/98887/d3pack-flare-short.json'}></ReactD3Pack>
+                }
+              </div>
               </div>
             </div>
         </div>

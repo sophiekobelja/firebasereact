@@ -2,9 +2,11 @@ import React, {Component} from 'react';
 import Bug from './Bug';
 import _ from 'lodash';
 //import { Graph } from 'react-d3-graph';
-import { Graph } from 'react-d3-graph';
+import { Graph } from './react-d3-graph2';
 const myConfig = {
     nodeHighlightBehavior: true,
+    "panAndZoom": true,
+    "staticGraph": false,
     node: {
         color: 'lightgreen',
         size: 120,
@@ -19,10 +21,9 @@ const myConfig = {
 };
 // graph event callbacks 
 const onClickNode = function(nodeId) {
-    console.log(this);
-    console.log(this.script);
     var script = this.script; 
-    var allnodes = document.getElementsByClassName("node");
+    var allnodes = document.getElementById("graph-id-graph-container-zoomable").getElementsByClassName("node");
+    //console.log(allnodes)
     for (var i = 0; i < allnodes.length; i++) {
       var childnodes = allnodes[i].childNodes
       if (childnodes[0].getAttribute("fill") === "red") {
@@ -30,6 +31,7 @@ const onClickNode = function(nodeId) {
       }
     }
     var nodeinfodiv = document.getElementById("nodeinfo")
+
     var n = document.getElementById(nodeId).childNodes;//.path;//.setAttribute("fill", 'red'); 
     console.log(script);
     n[0].setAttribute("fill", "red")
@@ -255,7 +257,7 @@ class BugsList extends Component {
   componentDidMount() {
     console.log("component mounted");
     console.log(this.props.bug)
-    const itemsRef = this.props.db.database().ref('items/bug_0');
+    const itemsRef = this.props.db.database().ref('items/1476291_DERBY-6206');
     itemsRef.on('value', (snapshot) => {
       this.getData(snapshot.val());
     });
@@ -274,6 +276,14 @@ class BugsList extends Component {
     });
   }
 }
+
+// componentDidUpdate() {
+//   var allnodes = document.getElementsByClassName("node");
+//     for (var i = 0; i < allnodes.length; i++) {
+//       var childnodes = allnodes[i].childNodes
+//       console.log(allnodes[i])
+//     }
+// }
 
 
    render() {
@@ -299,8 +309,7 @@ class BugsList extends Component {
                         </div>
                     </div>
                 </div>
-            );
-        
+            );        
   }
 }
 

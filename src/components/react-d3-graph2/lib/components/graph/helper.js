@@ -196,7 +196,7 @@ function _buildNodeProps(node, config, nodeCallbacks, highlightedNode, highlight
     var fontSize = highlight ? config.node.highlightFontSize : config.node.fontSize;
     var dx = fontSize * t + nodeSize / 100 + 1.5;
     var strokeWidth = highlight ? config.node.highlightStrokeWidth : config.node.strokeWidth;
-    console.log("building node props");
+    //console.log("building node props");
     return {
         className: _const2.default.NODE_CLASS_NAME,
         cursor: config.node.mouseCursor,

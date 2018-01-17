@@ -306,6 +306,7 @@ var Graph = function (_React$Component) {
         };
 
         _this.onMouseOverNode = function (id) {
+            console.log("it worked")
             _this.props.onMouseOverNode && _this.props.onMouseOverNode(id);
 
             _this.state.config.nodeHighlightBehavior && _this._setNodeHighlightedValue(id, true);
